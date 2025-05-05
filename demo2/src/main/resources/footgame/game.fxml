@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextAlignment?>
+
+<AnchorPane fx:id="root"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo2.footgame.GameController"
+            prefWidth="1280" prefHeight="720">
+
+    <!-- 1️⃣ Fond -->
+    <ImageView fx:id="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" preserveRatio="false" />
+
+    <!-- 2️⃣ Overlays Flash -->
+    <Rectangle fx:id="flashOverlay" opacity="0.0" mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" width="0.0" height="0.0">
+        <fill> <Color blue="0.4" green="0.4" red="1.0" opacity="1.0" /> </fill>
+    </Rectangle>
+
+    <!-- 3️⃣ Éléments de jeu -->
+    <ImageView fx:id="goalkeeper" />
+    <ImageView fx:id="player" />
+    <ImageView fx:id="ball" />
+    <ImageView fx:id="aimingArrow" visible="false" />
+
+    <!-- 4️⃣ Affichage Score + Indicateurs -->
+    <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" spacing="5.0">
+        <!-- ... (Contenu HBox score + HBox indicateurs inchangé) ... -->
+        <children>
+            <HBox fx:id="scoreDisplayBox" alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-background-radius: 8; -fx-padding: 5;">
+                <children>
+                    <ImageView fx:id="logoTeam1Display" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                    <Label fx:id="nameTeam1Display" text="TEAM1" textFill="white"> <font> <Font name="System Bold" size="20.0" /> </font> </Label>
+                    <Label fx:id="scoreDisplay" text="0 - 0" textFill="white">
+                        <font> <Font name="System Bold" size="54.0" /> </font> <!-- Police réduite -->
+                        <padding> <Insets left="15.0" right="15.0" /> </padding>
+                    </Label>
+                    <Label fx:id="nameTeam2Display" text="TEAM2" textFill="white"> <font> <Font name="System Bold" size="20.0" /> </font> </Label>
+                    <ImageView fx:id="logoTeam2Display" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </HBox>
+            <HBox fx:id="shotIndicatorContainer" alignment="CENTER" spacing="30.0" >
+                <children>
+                    <HBox fx:id="playerShotIndicatorBox" alignment="CENTER_LEFT" spacing="10.0" />
+                    <HBox fx:id="iaShotIndicatorBox" alignment="CENTER_RIGHT" spacing="10.0" />
+                </children>
+                <padding> <Insets left="60.0" right="60.0" /> </padding>
+            </HBox>
+        </children>
+    </VBox>
+
+    <!-- 5️⃣ Statut (en bas au centre) -->
+    <Label fx:id="statusLabel" text="🎯 Vise et tire ! (Espace)" textFill="white" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="CENTER">
+        <font> <Font size="20.0" /> </font> <padding> <Insets bottom="5.0" top="5.0" /> </padding> <style>-fx-background-color: rgba(0, 0, 0, 0.5);</style>
+    </Label>
+
+    <!-- 6️⃣ Popup de fin de partie (invisible au début) -->
+    <VBox fx:id="endGamePopup" alignment="CENTER" spacing="20.0" style="-fx-background-color: rgba(0, 0, 0, 0.85); -fx-background-radius: 15; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 15;" visible="false" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="200.0">
+        <!-- ... (Labels titre et message inchangés) ... -->
+        <children>
+            <Label fx:id="popupTitleLabel" text="Titre Résultat" textAlignment="CENTER" textFill="white">
+                <font> <Font name="System Bold" size="36.0" /> </font>
+            </Label>
+            <Label fx:id="popupMessageLabel" text="Message détaillé avec score et crédits..." textAlignment="CENTER" textFill="white" wrapText="true">
+                <font> <Font size="18.0" /> </font>
+            </Label>
+        </children>
+        <padding> <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /> </padding>
+    </VBox>
+
+    <!-- 7️⃣ Bouton Retour Menu Principal (lié au popup de fin de partie) -->
+    <Button fx:id="returnMenuButton" mnemonicParsing="false" onAction="#handleReturnToMenu" style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-weight: bold;" text="🏠 Menu Principal" visible="false" AnchorPane.bottomAnchor="215" AnchorPane.rightAnchor="570">
+        <font> <Font size="14.0" /> </font>
+    </Button>
+
+    <!-- **** NOUVEAU : Menu Pause **** -->
+    <!-- Bouton pour ouvrir le menu pause -->
+    <Button fx:id="pauseMenuButton" text="⏸ Menu" mnemonicParsing="false" onAction="#handlePauseMenuButton"
+            style="-fx-background-color: rgba(108, 117, 125, 0.7); -fx-text-fill: white; -fx-font-weight: bold;"
+            AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <font> <Font size="14.0" /> </font>
+    </Button>
+
+    <!-- Le popup du menu pause (invisible au début) -->
+    <VBox fx:id="pauseMenuPopup" alignment="CENTER" spacing="15.0"
+          style="-fx-background-color: rgba(0, 0, 0, 0.80); -fx-background-radius: 10; -fx-border-color: grey; -fx-border-width: 1; -fx-border-radius: 10;"
+          visible="false" prefWidth="250.0"
+          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0"> <!-- Positionné sous le bouton Menu -->
+        <padding> <Insets top="15.0" right="15.0" bottom="15.0" left="15.0" /> </padding>
+        <children>
+            <Label text="Pause" textFill="white">
+                <font> <Font name="System Bold" size="20.0" /> </font>
+                <VBox.margin> <Insets bottom="10.0" /> </VBox.margin>
+            </Label>
+            <Button fx:id="resumeButton" text="Reprendre" onAction="#handlePauseMenuButton" prefWidth="200.0" style="-fx-base: #28a745;"/> <!-- Reprendre utilise la même action que pause -->
+            <Button fx:id="restartButton" text="Recommencer" onAction="#handleRestartGame" prefWidth="200.0" style="-fx-base: #ffc107;"/>
+            <Button fx:id="quitToMenuButton" text="Quitter vers Menu" onAction="#handleQuitToMenu" prefWidth="200.0" style="-fx-base: #dc3545;"/>
+        </children>
+    </VBox>
+    <!-- **** FIN NOUVEAU **** -->
+
+</AnchorPane>

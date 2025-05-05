@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="700" prefWidth="1000"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo2.footgame.MenuController">
+
+    <!-- Fond -->
+    <ImageView fx:id="bgImage" fitHeight="700.0" fitWidth="1000.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+    <!-- Logo (gardé si utilisé pour intro future) -->
+    <ImageView fx:id="logo" fitHeight="700.0" fitWidth="1000.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="false" visible="false" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+
+    <!-- Menu principal -->
+    <!-- spacing="30" s'appliquera entre Bouton et Label suivant, et entre Label et Bouton -->
+    <VBox fx:id="menuBox" alignment="CENTER" spacing="15" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+
+            <!-- Groupe Coup d'envoi -->
+            <Label text="Coup d'envoi" textFill="white" alignment="CENTER">
+                <font><Font name="System Bold" size="18.0" /></font>
+                <!-- Marge sous le label -->
+                <VBox.margin><Insets bottom="5.0" /></VBox.margin>
+            </Label>
+            <Button fx:id="btnJouer" mnemonicParsing="false" onAction="#launchTeamSelection" prefHeight="120" prefWidth="300" style="-fx-background-color: transparent;">
+                <graphic> <ImageView fx:id="imgCoupDenvoi" fitHeight="120" fitWidth="300" pickOnBounds="true" preserveRatio="true" /> </graphic>
+            </Button>
+
+            <!-- Groupe Pack -->
+            <Label text="Pack" textFill="white" alignment="CENTER">
+                <font><Font name="System Bold" size="18.0" /></font>
+                <!-- Marge sous le label -->
+                <VBox.margin><Insets bottom="5.0" top="15.0" /></VBox.margin> <!-- Ajout marge top pour espacer du bouton précédent -->
+            </Label>
+            <Button fx:id="btnPack" mnemonicParsing="false" onAction="#openPacks" prefHeight="120" prefWidth="300" style="-fx-background-color: transparent;">
+                <graphic> <ImageView fx:id="imgPack" fitHeight="120" fitWidth="300" pickOnBounds="true" preserveRatio="true" /> </graphic>
+            </Button>
+
+
+            <!-- Groupe Quitter -->
+            <Label text="Quitter le jeu" textFill="white" alignment="CENTER">
+                <font><Font name="System Bold" size="18.0" /></font>
+                <!-- Marge sous le label -->
+                <VBox.margin><Insets bottom="5.0" top="15.0" /></VBox.margin> <!-- Ajout marge top pour espacer -->
+            </Label>
+            <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#exitGame" prefHeight="120" prefWidth="300" style="-fx-background-color: transparent;">
+                <graphic> <ImageView fx:id="imgQuitter" fitHeight="120" fitWidth="300" pickOnBounds="true" preserveRatio="true" /> </graphic>
+            </Button>
+
+        </children>
+        <padding>
+            <Insets top="40.0" bottom="40.0"/> <!-- Ajout padding global pour centrer verticalement -->
+        </padding>
+    </VBox>
+
+    <!-- Crédits -->
+    <Label fx:id="creditsLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT"
+           style="-fx-background-color: rgba(0,0,0,0.6); -fx-background-radius: 10; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 5 15 5 15;"
+           text="💰 0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+
+</AnchorPane>

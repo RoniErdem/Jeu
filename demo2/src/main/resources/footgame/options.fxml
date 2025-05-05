@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo2.footgame.OptionsController"
+            prefWidth="800" prefHeight="600">
+
+    <Label text="OPTIONS"
+           layoutX="300" layoutY="250"
+           style="-fx-font-size: 30px; -fx-text-fill: white;"/>
+</AnchorPane>

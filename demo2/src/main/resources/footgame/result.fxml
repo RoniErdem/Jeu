@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo2.footgame.ResultController"
+            prefWidth="800" prefHeight="600">
+
+    <Label fx:id="resultLabel" layoutX="250" layoutY="200"
+           style="-fx-font-size: 36px; -fx-text-fill: white;" />
+
+    <Button text="Menu principal" layoutX="300" layoutY="300"
+            prefWidth="200" onAction="#retourMenu"/>
+</AnchorPane>
